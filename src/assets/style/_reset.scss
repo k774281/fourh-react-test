@@ -1,0 +1,36 @@
+@import url("https://font.emtech.cc/css/jfOpenHuninn");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-size: 18px;
+  font-family: "jfOpenHuninn", sans-serif;
+  background-color: #ffffff;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+img {
+  width: 100%;
+  vertical-align: middle;
+}

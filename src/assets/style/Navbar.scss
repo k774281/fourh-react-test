@@ -1,0 +1,215 @@
+@use './variable' as vars;
+@use 'mixin' as mix;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid vars.$color-secondary;
+  padding: vars.$spacing-md;
+
+  &-top {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      color: #aaa;
+      letter-spacing: 5px;
+    }
+
+    .nav-link + .nav-link {
+      border-left: 1px solid vars.$color-secondary;
+    }
+
+    .nav-link {
+      a {
+        margin: 0 vars.$spacing-sm;
+        color: vars.$color-text;
+        font-size: vars.$font-size-base;
+
+        &:hover {
+          color: vars.$color-primary;
+          transition: all 0.3s;
+        }
+      }
+    }
+
+    .fa-magnifying-glass {
+      line-height: 1.5;
+      cursor: pointer;
+    }
+  }
+
+  &-bottom {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: vars.$color-secondary;
+    padding: vars.$spacing-md vars.$spacing-xs;
+    transition: all 0.3s ease;
+
+    li {
+      position: relative;
+    }
+
+    a {
+      margin: vars.$spacing-xs vars.$spacing-md;
+      color: vars.$color-text;
+      font-weight: 500;
+      font-size: vars.$font-size-lg;
+
+      &:hover {
+        color: vars.$color-primary;
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: vars.$color-background;
+      border: 1px solid #ddd;
+      min-width: 180px;
+      display: none;
+      flex-direction: column;
+
+      li {
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        display: block;
+        padding: vars.$spacing-sm vars.$spacing-md;
+        margin: 0;
+
+        &:hover {
+          background-color: vars.$color-primary;
+        }
+      }
+    }
+
+    // 手機版展開 (點擊)
+    .nav-item.open > .dropdown {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      border: none;
+      background: vars.$color-background;
+      z-index: 99;
+      margin-top: vars.$spacing-md;
+    }
+  }
+}
+
+// 漢堡按鈕
+.menu-toggle {
+  cursor: pointer;
+  display: none;
+
+  span {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 3px;
+    background-color: #555;
+    border-radius: 50px;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 3px;
+      background-color: #555;
+    }
+
+    &:before {
+      top: 5px;
+    }
+    &:after {
+      bottom: 5px;
+    }
+  }
+}
+
+.fa-caret-down {
+  margin-left: vars.$spacing-xs;
+}
+
+// 搜尋
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  input {
+    padding: 10px;
+    font-size: vars.$font-size-base;
+    width: 300px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: vars.$font-size-base;
+    cursor: pointer;
+  }
+}
+
+.search-icon {
+  cursor: pointer;
+}
+
+// 響應式
+@media (max-width: vars.$breakpoint-lg) {
+  .navbar-top {
+    display: none;
+  }
+
+  .navbar-bottom {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    li {
+      width: 100%;
+    }
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-top-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    width: 100%;
+
+    a {
+      margin: vars.$spacing-xs vars.$spacing-md;
+    }
+
+    hr {
+      width: 80%;
+      border: none;
+      border-top: 1px solid vars.$color-secondary;
+      margin: 10px 0;
+    }
+  }
+
+  .navbar-bottom .nav-item.open > .dropdown {
+    position: static;
+  }
+}

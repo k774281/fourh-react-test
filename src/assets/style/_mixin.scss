@@ -1,0 +1,59 @@
+// 匯入變數
+@use 'variable' as vars;
+
+// Flex 置中
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// 按鈕樣式
+@mixin button-style(
+  $color-primary: vars.$color-primary,
+  $color-btn-text: vars.$color-btn-text,
+  $color-secondary-hover: vars.$color-secondary-hover,
+  $inner-shadow-dark: vars.$inner-shadow-dark
+) {
+  background-color: $color-primary;
+  color: $color-btn-text;
+  border: none;
+  border-radius: vars.$border-radius-sm;
+  padding: vars.$spacing-sm vars.$spacing-md;
+  cursor: pointer;
+  font-size: vars.$font-size-base;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    @if $color-secondary-hover != null {
+      background-color: $color-secondary-hover;
+    }
+    @if $inner-shadow-dark != null {
+      box-shadow: $inner-shadow-dark;
+    }
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+}
+
+// 卡片樣式
+@mixin card(
+  $bg-color: vars.$color-background,
+  $radius: vars.$border-radius-md,
+  $padding: vars.$spacing-md
+) {
+  background-color: $bg-color;
+  border-radius: $radius;
+  padding: vars.$spacing-sm;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+// Grid Card
+@mixin grid-card($gap: vars.$gap-1) {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: vars.$gap-1;
+}
